@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PigLatin </title>
+<link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
+<link rel="stylesheet" href="css/mainstyle.css" />
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/webworks-1.0.4.5.js"></script>
+<script src="js/PigLatin.js"></script>
+<script src="js/Combination.js"></script>
+<script src="js/GameController.js"></script>
+<script src="js/Leaderboard.js"></script>
+<script src="js/Settings.js"></script>
+<script src="js/jquery.mobile-1.2.0.js"></script>
+<script>
+var objPigLatin = new PigLatin();
+var objGameCon = new GameController();
+var objLeaderboard = new Leaderboard();
+$(document).on("pageinit",function(){
+  
+  try{
+      
+      
+	
+      
+      
+      objLeaderboard.init();
+      objLeaderboard.displayLeaderboard();
+ 	  $("#score").html(objPigLatin.score);
+    
+
+	
+	}catch(ex){
+		console.log(ex);
+	}
+	
+});
+
+
+
+
+
+var init = function(){
+    try{
+     	try{
+ 	objPigLatin.shuffleGen();
+ 	}catch(ex){
+		console.log(ex);
+	}
+ 	
+    if(objPigLatin.generated==1)
+	 { 
+	  
+	 $("#genName").html("Word"); 
+	 $("#wordlatin").html(objPigLatin.sortWord(objPigLatin.word));
+	 console.log("generated "+objPigLatin.generated);
+	 console.log(objPigLatin.word);
+	 }  
+	else if(objPigLatin.generated==2)
+	    {
+	     
+	$("#genName").html("Latin");
+	$("#wordlatin").html(objPigLatin.reverseLatin(objPigLatin.latin));
+	console.log("generated "+objPigLatin.generated);
+	console.log(objPigLatin.latin);
+	     }
+	     else
+	       console.log(" ");
+$("#answer").val(" ");
+//objPigLatin.generated=0;
+	}catch(ex){
+	 
+		console.log(ex);
+	}
+}
+
+
+ 
+
+
+
+</script>
+</head>
+<body>
+<!-- start of #index page--> 
+<div data-role="page" id="index" data-theme="b">
+        <div data-role="header" data-position="fixed">
+        <h1>PigLatin</h1>
+        </div>
+
+    <div data-role="content">
+        <br />
+    <ul data-role="listview" data-inset="true">
+    <li><a href="#game" id="newGame">
+		<h3>New Game</h3>
+        <p>Start a new Game</p>
+        </a>
+    </li>
+    <!--<li>
+        <a href="#" id="restoreGame" >
+        <h3>Restore Game</h3>
+            <p>Continue where you left off.</p>
+        </a>
+    </li>-->
+    <li>
+        <a href="#instructions">
+        <h3>Instructions</h3>
+            <p>Learn how to play the game</p>
+        </a>
+    </li>
+    <li>
+        <a href="#settings">
+        <h3>Settings</h3>
+            <p>Tailor your game.</p>
+        </a>
+    </li>
+    <li>
+        <a href="#leaderboard">
+        <h3>Leaderboard</h3>
+            <p>See your progress.</p>
+        </a>
+    </li>
+    <li>
+        <a href="#about">
+        <h3>About</h3>
+            <p>Find out more about the game and it's developer</p>
+        </a>
+    </li>
+    <li>
+        <a href="#exitdialog" data-rel="dialog" id="exitGame">
+        <h3>Exit</h3>
+            <p>Take some time off.</p>
+        </a>
+    </li>
+    </ul>
+        <div class="ad_area"></div>
+    </div>
+    <div data-role="footer" data-position="fixed">
+       <h1>Developed by Khulekani Ngongoma.</h1>
+    </div>
+    </div><!-- end of #index page--> 
+   
+   <!-- start of page #leaderboard -->
+   <div data-role="page" id="leaderboard" data-theme="b">
+    <div data-role="header" data-theme="c">
+    <h1>PigLatin</h1>
+    </div>
+        <div data-role="content" data-theme="c">
+            <h3>Leaderboard</h3>
+            <div id="leaderb">
+            
+            
+            </div>
+            <div class="ad_area"></div>
+        </div>
+        <div data-role="footer" data-theme="c" data-position="fixed">
+        <a href="#" class="back" style="width: 300px" data-role="button">Back</a>
+        </div> 
+    </div><!-- end of page #leaderboard -->
+    
+    
+    <!-- start of page #instructions -->
+    <div data-role="page" id="instructions" data-theme="b">
+    <div data-role="header" data-theme="c">
+    <h1>PigLatin</h1>
+    </div>
+        <div data-role="content">
+            <h3>Instructions</h3>
+        <p>Pig Latin is a nonsense language. To create a word in pig Latin, you remove the first letter and then add the first letter and "ay" at the end of the word. For example "dog" becomes "ogday" and "cat" becomes "atcay".    
+</p>
+<p>
+In this PigLatin game your objective is to covert words to pig Latin and visa versa as fast as possible to climb the leaderboard. But there is a twist when a word is presented to you, it is presented with its letters sorted alphabetically, and you have to put the letters in order in your head, and then convert it to pig Latin for submission. And there is also a twist when a pig Latin is generated, it is presented in reverse. For example, yadrengise when put in order is esingerday, and when converted to English is designer.      
+
+</p> 
+        </div>
+        <div data-role="footer" data-theme="c" data-position="fixed">
+        <a href="#" class="back" style="width: 300px" data-role="button">Back</a>
+        </div> 
+    </div> <!-- end of page #instructions -->
+    
+    <!-- start of page #about -->
+     <div data-role="page" id="about" data-theme="b">
+    <div data-role="header" data-theme="c">
+    <h1>PigLatin</h1>
+    </div>
+        <div data-role="content">
+            <h3>About</h3>
+            <center>
+        <p>Name: PigLatin</p>
+        <p>Version: 1.0</p>
+        <p>Developer: Khulekani Ngongoma</p>
+        <p>Support: khulekanik@live.com</p>
+                </center>
+        </div>
+        <div data-role="footer" data-theme="c" data-position="fixed">
+        <a href="#" class="back" style="width: 300px" data-role="button">Back</a>
+        </div> 
+    </div> <!-- end of page #about -->
+    
+    <!-- start of exitdialog page -->
+    <div data-role="dialog" id="exitdialog" data-transtion="slideup" data-theme="b">
+            <div data-role="header" data-theme="b">
+       <h3>Exit</h3>
+        </div>
+        <div data-role="content" data-theme="b">
+
+        <p>Are you sure?</p>
+            <div class="ui-grid-a">
+            <div class="ui-block-a"><a href="#" class="back" id="exitNo" data-role="button">No</a></div>
+            <div class="ui-block-b"><a href="#" id="exitYes" data-role="button" onclick="exit()">Yes</a></a></div>
+          </div>
+            </div>
+     
+      <div data-role="footer" data-theme="c">
+        
+          </div> 
+        </div> <!-- end of exitdialog page -->
+        
+        <!-- start of finishdialog page -->
+         <div data-role="dialog" id="finishdialog" data-transtion="slideup" data-theme="c">
+           
+        <div data-role="content" data-theme="b">
+ 			<div data-role="header" data-theme="b">
+       			<h3>Game over</h3>
+        	</div>
+        	<div data-role="content">
+        <p>Your score is <span id="scoreDisplay"></span> </p>
+            <a href="#index" data-role="button">Dismiss</a>
+            	<script>
+          $("#finishdialog").on("pageshow",function(){
+             objGameCon.gameStarted = false;
+			$("#scoreDisplay").html(objPigLatin.score);
+			//objPigLatin.resetGame();
+			objGameCon.applySettings();
+			
+		});
+            
+        </script>
+            </div>
+                <div data-role="footer" data-theme="c"></div>
+            </div>
+      
+        </div> <!-- end of finishdialog page -->
+        
+        <!-- start of highscoredialog page -->
+        <div data-role="dialog" id="highscoredialog" data-transtion="slideup" data-theme="c">
+          
+        <div data-role="content" data-theme="b">
+       <div data-role="header" data-theme="b">
+       <h3>You win</h3>
+        </div>
+        <div data-role="content" id="highscorecontent">
+        <p>Congratulations! You have made it to the Leaderboard. Please enter your name.</p>
+        <p>Your score is: <span id="highscoreDisplay"></span></p>
+		<script>
+          $("#highscoredialog").on("pageshow",function(){
+            objGameCon.gameStarted = false;
+			$("#highscoreDisplay").html(objPigLatin.score);
+			objGameCon.applySettings();
+			//objPigLatin.resetGame();
+			
+		});
+            
+        </script>
+            <input type="text" name="name" id="name" />
+            <a href="#" id="enterScore" data-role="button">Okay</a>
+            </div>
+                <div data-role="footer" data-theme="c"></div>
+            </div>
+      
+      
+        </div> <!-- end of highscoredialog page -->
+        
+   <!-- start of page #settings -->
+   <div data-role="page" id="settings" data-theme="a">
+    <div data-role="header" data-theme="a">
+	<h1>PigLatin</h1>
+    </div>
+        <div alig="left" style="text-align:left" data-theme="a" data-role="content">
+            <h3>Settings</h3>
+            <label for="level" value='0'>Difficulty</label>
+			<select id="level" name="level">
+			<option value='0'>Select level</option>
+			<option value="0">Easy</option>
+			<option value="1">Intemediate</option>
+			<option value="2">Hard</option>
+			</select>
+            <label for="sound">Sound:</label>
+            <select name="sound" id="sound" data-role="slider">
+            <option value="off">Off</option>
+            <option value="on">On</option>
+            </select>
+            <label for="volume">Volume</label>
+            <input type="range" min="1" max="5" id="volume" name="volume" />
+        </div>
+        <div data-role="footer" data-theme="c" data-position="fixed">
+        <a href="#index" class="back" style="width: 300px" data-role="button">Back</a>
+        </div> 
+    </div> <!-- end of page #settings -->
+    
+
+   
+
+
+<!-- start of page #game -->
+<div data-role="page"id="game" data-theme="b">
+<div data-role="header">
+<h3>PigLatin</h3>
+<a href="#popupPanel" id="menuBtn" data-role="button" data-rel="popup" data-icon="grid" data-iconpos="notext" data-mini="true">Menu</a>
+</div>
+<div data-role="content">
+<!--<audio id="backgroundMusic" src="media/wallewal.wav"></audio>-->
+<hr />
+<div id="answerNoti" style="height:20px;"></div>
+<hr />
+<table>
+<tr><td><div id="genName"></div></td><td><div id="wordlatin"></div></td></tr>
+<tr><td>Answer: </td><td><input type="text" name="answer" id="answer" value="" /> </td></tr>
+<tr><td><a href="#" data-role="button" data-ajax="false" name='submit' id="submit">Submit</a> </td> </tr>
+</table>
+<div data-role="popup" id="popupPanel"  data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
+
+    <a href="#" class="back" data-role="button" data-theme="a" data-icon="back" data-mini="true">Back</a>
+    <a href="#instructions" data-role="button" data-theme="a" data-icon="grid" data-mini="true">Instructions</a>
+    <!--<a href="#settings" data-role="button" data-theme="a" data-icon="grid" data-mini="true">Settings</a>-->
+    <a href="#" data-role="button" id="help" data-theme="a" data-icon="help" data-mini="true">Hint</a>
+    <div id="hint">For your Web and Mobile Solutions, you can contact me on 078 464 6803.<br /> I am based in Durban, South Africa.</div>
+    <a href="#" data-role="button" data-icon="gear" data-mini="true">Time: <span id="timer"></span></a>
+	<a href="#" data-role="button" data-icon="gear" data-mini="true">Score: <span id="score"></span></a>
+	
+</div>
+<div class="ad_area"></div>
+</div>
+<div data-role="footer" data-position="fixed">
+Developed by Khulekani Ngongoma
+</div>
+</div>
+<!-- end of page #game -->
+<script src="js/ad_server.js"></script>
+<script>
+  try{
+    
+
+	$("#submit").on("vclick", function(){
+	  var answer = $.trim($("#answer").val());
+	  objPigLatin.setAnswer(answer);
+	  objPigLatin.checkAnswer()
+	  objPigLatin.toggleGenerated();
+	  init(); 
+	       
+	});
+
+	
+
+ 	
+ 	$("#help").on("vclick",function(){
+		$("#hint").html(objPigLatin.getHint());
+		
+	});
+	
+	 // when a user exits we save the game's state and then exit
+          $("#exitYes").on("vclick",function () {
+              exit();
+              
+
+          });
+          function exit() {
+            localStorage['gameState'] = $("#game").html();
+			localStorage['gameStateVars'] = JSON.stringify(objPigLatin);
+			localStorage['settings'] = objSettings;
+            blackberry.app.exit();
+          }
+          
+          
+          // restores the game state when #restoreGame is clicked
+          var restoreVars;
+          $("#restoreGame").on("vclick",function(){
+             try{
+			$("#game").html(localStorage['gameState']);
+	        restoreVars = JSON.parse(localStorage['gameStateVars']);
+	        objPigLatin.word = restoreVars.word;
+	 		objPigLatin.latin = restoreVars.latin;
+			objPigLatin.hint = restoreVars.hint;
+	 		objPigLatin.answer = restoreVars.answer;
+	 		objPigLatin.generated = restoreVars.generated;
+	 		objPigLatin.row = restoreVars.row;
+	 		objPigLatin.genName = restoreVars.genName;
+	 		objPigLatin.score = restoreVars.score;
+	 		objPigLatin.generatedComb = restoreVars.generated;
+	        $.mobile.changePage("#game");
+	        }catch(ex){
+	         
+				console.log(ex);
+			}
+		});
+          
+        // when a user enters his/her name on the high score dialog, we save the high score and name on the leaderboard object
+      $("#enterScore").on("vclick",function(){
+		objLeaderboard.setHighScore($("#name").val());
+		$.mobile.changePage("#index");
+	});
+      
+      
+     $("#settings").on("pagehide",function(){
+	  Settings.sound = $("#sound").val();
+	  Settings.volume = parseInt($("#volume").val());
+	  if($("#difficulty").val()==undefined)
+	    Settings.difficulty = 0;
+	    else
+	       Settings.difficulty = $("#difficulty").val();
+	     objGameCon.applySettings();
+}); 
+
+$(".back").on("vclick",function(event,ui){
+ 	
+    
+	if(objGameCon.gameStarted===true)
+	{
+	    $("#newGame h3").html("Resume");
+	    $("#newGame p").html("Continue where you left off.");
+	    objGameCon.pause();
+	     }
+	    $.mobile.changePage("#index");
+	   
+	
+});
+
+$("#newGame").on("vclick",function(){
+  
+     	 objGameCon.startGame();
+	     init();
+});
+
+$("#game").on({
+	pageshow : function(){
+	   objGameCon.showMenu();
+	}
+});
+
+
+
+var checkForHighScore = function(){
+	
+	if(parseInt($.trim($("#score").html()))>objGameCon.highScore)
+	    $.mobile.changePage("#highscoredialog");
+	    else
+	       $.mobile.changePage("#finishdialog");
+}
+
+  }catch(ex){
+	console.log(ex);
+}        
+      
+     
+            AdServer.init();
+            AdServer.iterateAds(15000);
+       
+      
+      
+</script>
+</body>
+</html>

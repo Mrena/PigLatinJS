@@ -1,0 +1,4 @@
+Combination = {
+	word : Array("dog","cat"),
+	latin : Array("ogday","atcay")
+}

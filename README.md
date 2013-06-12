@@ -1,0 +1,1 @@
+I didn't have Git during development, and I am not an advanced Git user thats why I didn't separate this project's code into smaller commits.
